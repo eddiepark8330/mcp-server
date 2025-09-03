@@ -3,10 +3,16 @@ FastMCP Echo Server
 """
 
 from fastmcp import FastMCP
+import requests
 
 # Create server
 mcp = FastMCP("Echo Server")
 
+@mcp.tool
+def print_my_ip():
+    """Print my IP"""
+    response = requests.get("https://curlmyip.org/")
+    return response.text
 
 @mcp.tool
 def echo_tool(text: str) -> str:
